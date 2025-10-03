@@ -1,8 +1,25 @@
 config:
   aws:region: us-east-1
-  aws:accessKey:
-    secure: AAABAGai+qrMae1tnk3w3evnCzOz8GLQmdooI5oz7wu9kaOvzisj4X7OWOUkTsFcE+noGA==
-  aws:secretKey:
-    secure: AAABAJpYPSkmsEGR+PbDTD9D1bzZ7IK3lCYlYXHJRLJNDBFb1PRcZzAKJ/SlvTCozWuAArEsWq2Z25fKfdg4wFrBm3QAcH6W
-  aws:token:
-    secure: AAABAKlf3K2Q82F9GTOtQmafFHlJ/aPUWSSkFVebGVUcoCs3WQbqs1KqCO+jk7IbdMnb4ZC2+pZxtz2mrgdSuyu2RZCAQJ7QmcmwbhJ7rrMm2tdYyO5jIyMdftL1HAVHoLe0TFbQdamoyDhVVn5zjzfG3MSMUJj9dcgZlWt1hj5HBI5qV4IMxSvCJzZNNLyD09a7WkRncCChKj/cdKdcMBQqRvZWuvyiFtzREDXqDc6c8XQa6bDZCBXbjfqXSKMhv3XTYkqbXHekxeZKHf23BOQf2ric/BvY9n3bCsaHUWuiHXvHx6PPB20K95WXTmIw6KN13pLpa524VPB39ZOh5N62X5SrEvunQytF2PYDA4EBLk3QY5zmm/9Z/H8fwMAp5NQjNMZS9bkP007k+Bl4iVOhAoCfI1ufbPAE54zPIzt6l5BqMp9AYuf9TBMDgaU9EwELuWQaUWeV65tzfNk1HwPmGvhSdEkjU/KwYintb1+n0YR/QEv6iHwbfUTzHyn/x8WPuoo0yFofL/7QMXb5ioRB2iKpC0VRxiRPrrv5imilaVHG3x0KdSEvFKxrHEyZSP6DEr82oubs9kQ+3jkM1KWUlSvkuklxEeam4SdtuT8eQTyk7sjJf4eMrIAuEbb33exTts5lGJOUw/ewyK5SQOtDnR4z/deTT3OWabDxH/8f0qF5g2GQgrTYokb9I5N396Ly9LnzX18Mu+O6PshpOP4op7ecDPtsuioRjCV5ftz7hFQMWfEaknCVxvDNx3toxo10ZvIbkuuvz/Ko55KvJKXZ+4oS3qnI8DS0RWkrVhA0Up+V/cq5RwTYeiWL5PZb2oqftnUjyScxEzFb7rXwni5lMzgu9QaeQ9SElF7SX+RiKnDfBeMHEs3vcQkeZON07Bo77p21+ERTLx8RErsQsLqN3iysLeWWCTs2AW9tF3E9NEZbPOD27Jqla0JtBar+BaotuLjkhQJQAmtLsIUEC9DLX8a69BoClZSTgqsEv5vgLHDiHTsvNuu1TBgNW6KrMXxqav8DjHXvqZuOJJwGkJUdwh+XTyjofgkcYm6GtME=
+  upframer-infra:jwtSecret:
+    secure: AAABADnS73fzPvaGqUvljsoRTICwyaEETeHMVrwr9aN1hD6WIsh/N0ufx9o9R6eXCPAv5xE9NTxMu1MmTptR2yqqlh4lhauAVKIG5g==
+  upframer-infra:rabbitmqDefaultPass:
+    secure: AAABACAdcJg1wRFVY4YrktlXPkP7LkZNLNkuqroRjLd+vv5Kdw==
+  upframer-infra:smtpPass:
+    secure: AAABAMUKs6hR/JElT87q2cMLFelR8ar7q514zyfvC67xRDhI7rrB3qT1uGonJKxi
+  upframer-infra:smtpHost: smtp.gmail.com
+  upframer-infra:smtpUser:
+    secure: AAABAGwFqNlqUHjVcGoN5J6QKfq30ACRj8R5ikN1c0s6O/3j12PWUaJRgRCgv/KbmkjJjFQ=
+  upframer-infra:smtpPort: "587"
+  upframer-infra:smtpSecure: "false"
+  upframer-infra:awsRegion: us-east-1
+  upframer-infra:rabbitmqDefaultUser: admin
+  upframer-infra:awsAccessKeyId:
+    secure: AAABABH/lgsbGzyjjp6FRSUGrbX7xhsz2Ph+C40LVD6h2SbIpD+K+jnJM7gaBwfNRa4NEA==
+  upframer-infra:awsSecretAccessKey:
+    secure: AAABAD/82E1635rkKpQlcTxjUp+m777PPKqsNOT0e+HKLnvhXUkaXWj6E5drZlm0WrtdJhmuNXnKKIY7Uc9Wp065Ft7iQSTD
+  upframer-infra:awsBucketName:
+    secure: AAABAPmSeBnfFo5yg2VgY1RFp8tzGX0C3w7d0rPD97WnwozmtC5UYLqIiy46QlsZU3BzAPOaXDY=
+  upframer-infra:databaseUrlAuth:
+    secure: AAABALTcShyf4Ny4Q8PRxZ9j+6uGF0h6MrnFtgWsvtsGEnlNhb7fd96UcUufUe/y0P4o9x9lflApruNfX6uz3CJEgm1TJMuz6/KPb1gfj00Q+T9S83T7BSfFT0ick+StX5FwpnCDKZY609oAO8lCLVP4NW13SHbUzKw0lAuDggoU2SAPCAE4EJaKnmCClCvcmPdPPeteIYO735GifqpKLUJRV1/ITqhbGB01
+  upframer-infra:databaseUrlUpload:
+    secure: AAABALBZtw6uB+5MZvQe311M/i63qG9swleY4Rqw5GRy8d20HhwfrLLxcUbH2xnikNCoJxg6QfLaN1HTaBCNJ4LKl/YWJlav/EbLKernum4bizwnrl2BRVCk2u1Wb5jys/9DIsk36QJipN/rKyjaSdUh+pUKHYuwVnHbHXCHe61rIorLBjjNVXfxeilgDIzvGA/xoTkMJplXt1IO9cXffC+IOoEqaDjZVTnOR/m+

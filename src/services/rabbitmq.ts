@@ -1,6 +1,6 @@
 import * as awsx from "@pulumi/awsx";
 import { cluster } from "../cluster";
-import { labRole } from "../roles/lab-roles";
+import { ecsRole } from "../roles/ecs-roles";
 import { appLoadBalancer, networkLoadBalancer } from "../load-balancer";
 import { RABBITMQ_DEFAULT_PASS, RABBITMQ_DEFAULT_USER } from "../config/env";
 
@@ -50,8 +50,8 @@ export const rabbitMQService = new awsx.classic.ecs.FargateService(
     desiredCount: 1,
     waitForSteadyState: false,
     taskDefinitionArgs: {
-      taskRole: labRole,
-      executionRole: labRole,
+      taskRole: ecsRole,
+      executionRole: ecsRole,
       container: {
         image: "rabbitmq:3-management",
         cpu: 256,
