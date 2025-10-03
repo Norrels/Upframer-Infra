@@ -3,15 +3,21 @@ import * as pulumi from "@pulumi/pulumi";
 import { uploadDockerImagem } from "../images/images";
 import { cluster } from "../cluster";
 import { appLoadBalancer, networkLoadBalancer } from "../load-balancer";
-
-import { labRole } from "../roles/lab-roles";
+import { ecsRole } from "../roles/ecs-roles";
 import {
   AWS_ACCESS_KEY_ID,
-  AWS_BUCKET_NAME,
   AWS_SECRET_ACCESS_KEY,
   AWS_SESSION_TOKEN,
-  DATABASE_URL,
+  AWS_REGION,
+  DATABASE_URL_UPLOAD,
+  JWT_SECRET,
+  SMTP_HOST,
+  SMTP_PORT,
+  SMTP_SECURE,
+  SMTP_USER,
+  SMTP_PASS,
 } from "../config/env";
+import { s3BucketName } from "../storage/s3";
 
 const uploadTargetGroup = appLoadBalancer.createTargetGroup("upload-target", {
   port: 3333,
@@ -44,8 +50,8 @@ export const uploadService = new awsx.classic.ecs.FargateService(
     desiredCount: 1,
     waitForSteadyState: false,
     taskDefinitionArgs: {
-      taskRole: labRole,
-      executionRole: labRole,
+      taskRole: ecsRole,
+      executionRole: ecsRole,
       container: {
         image: uploadDockerImagem.ref,
         cpu: 256,
@@ -53,24 +59,28 @@ export const uploadService = new awsx.classic.ecs.FargateService(
         portMappings: [uploadHttpListener],
         environment: [
           {
+            name: "NODE_ENV",
+            value: "production",
+          },
+          {
+            name: "PORT",
+            value: "3333",
+          },
+          {
             name: "RABBITMQ_URL",
             value: pulumi.interpolate`amqp://admin:admin@${networkLoadBalancer.loadBalancer.dnsName}:5672`,
           },
           {
-            name: "BROKER_URL",
-            value: pulumi.interpolate`amqp://admin:admin@${networkLoadBalancer.loadBalancer.dnsName}:5672`,
+            name: "RABBITMQ_QUEUE_STATUS_CHANGE",
+            value: "video-processing-result",
+          },
+          {
+            name: "RABBITMQ_QUEUE_CREATED",
+            value: "job-creation",
           },
           {
             name: "DATABASE_URL",
-            value: DATABASE_URL,
-          },
-          {
-            name: "AWS_S3_BUCKET_NAME",
-            value: AWS_BUCKET_NAME,
-          },
-          {
-            name: "AWS_REGION",
-            value: "us-east-1",
+            value: DATABASE_URL_UPLOAD,
           },
           {
             name: "AWS_ACCESS_KEY_ID",
@@ -83,6 +93,38 @@ export const uploadService = new awsx.classic.ecs.FargateService(
           {
             name: "AWS_SESSION_TOKEN",
             value: AWS_SESSION_TOKEN,
+          },
+          {
+            name: "AWS_REGION",
+            value: AWS_REGION,
+          },
+          {
+            name: "AWS_S3_BUCKET_NAME",
+            value: s3BucketName,
+          },
+          {
+            name: "JWT_SECRET",
+            value: JWT_SECRET,
+          },
+          {
+            name: "SMTP_HOST",
+            value: SMTP_HOST,
+          },
+          {
+            name: "SMTP_PORT",
+            value: SMTP_PORT,
+          },
+          {
+            name: "SMTP_SECURE",
+            value: SMTP_SECURE,
+          },
+          {
+            name: "SMTP_USER",
+            value: SMTP_USER,
+          },
+          {
+            name: "SMTP_PASS",
+            value: SMTP_PASS,
           },
         ],
       },
