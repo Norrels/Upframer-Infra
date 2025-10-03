@@ -3,7 +3,7 @@ import * as pulumi from "@pulumi/pulumi";
 import { processDockerImagem } from "../images/images";
 import { cluster } from "../cluster";
 import { networkLoadBalancer, appLoadBalancer } from "../load-balancer";
-import { labRole } from "../roles/lab-roles";
+import { ecsRole } from "../roles/ecs-roles";
 import {
   AWS_BUCKET_NAME,
   AWS_ACCESS_KEY_ID,
@@ -42,8 +42,8 @@ export const processService = new awsx.classic.ecs.FargateService(
     desiredCount: 1,
     waitForSteadyState: false,
     taskDefinitionArgs: {
-      taskRole: labRole,
-      executionRole: labRole,
+      taskRole: ecsRole,
+      executionRole: ecsRole,
       container: {
         image: processDockerImagem.ref,
         cpu: 256,
@@ -52,7 +52,7 @@ export const processService = new awsx.classic.ecs.FargateService(
         environment: [
           {
             name: "ENVIRONMENT",
-            value: "development",
+            value: "production",
           },
           {
             name: "AWS_BUCKET",
@@ -76,10 +76,6 @@ export const processService = new awsx.classic.ecs.FargateService(
           },
           {
             name: "RABBITMQ_URL",
-            value: pulumi.interpolate`amqp://admin:admin@${networkLoadBalancer.loadBalancer.dnsName}:5672`,
-          },
-          {
-            name: "BROKER_URL",
             value: pulumi.interpolate`amqp://admin:admin@${networkLoadBalancer.loadBalancer.dnsName}:5672`,
           },
         ],
